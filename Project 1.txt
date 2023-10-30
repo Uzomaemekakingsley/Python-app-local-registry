@@ -1,0 +1,52 @@
+Ticket-1: Configure a Local Docker Registry on Kubernetes
+
+Set up a Kubernetes cluster: If you don't already have a Kubernetes cluster, you'll need to create one. 
+
+Tools like Minikube or kind (Kubernetes in Docker) can be used for local development.
+
+Deploy Docker Registry: Use Kubernetes manifests (YAML files) to deploy a Docker Registry to your Kubernetes cluster. You can use the official Docker Registry image.
+
+Expose Registry: Make sure to expose the Docker Registry service so that you can access it from your local machine.
+
+Test: Verify that you can access the registry both from your local machine (via the exposed service) and within the Kubernetes cluster.
+================================================================================================================================================
+
+Ticket-2: Deploy a Python Web Application to Kubernetes
+
+Create a Python Web App: Develop a simple Python web application that responds with "Hello Kube" when accessed at the root URL.
+
+Build Docker Image: Create a Dockerfile for your Python app, build the Docker image, and tag it appropriately.
+
+Push to Docker Registry: Push the Docker image to the local Docker Registry configured in Ticket-1.
+
+Helm Chart for Web App: Create a Helm chart for your Python web application. Define the deployment, service, and any necessary configuration parameters in the chart.
+
+Deploy with Helm: Use Helm to deploy the Python web application to Kubernetes. Provide values for any required Helm chart parameters.
+
+Verify: Access the application's URL to ensure it displays "Hello Kube" as expected.
+================================================================================================================================================
+Ticket-3: Create a Helm Chart for the Web Application
+
+Helm Chart Structure: Set up the directory structure for your Helm chart with appropriate files (values.yaml, deployment.yaml, service.yaml, etc.).
+
+Define Deployment: In the deployment.yaml file, define the Kubernetes Deployment for your web application, including container specifications.
+
+Define Service: In the service.yaml file, define the Kubernetes Service to expose your web application.
+
+Parameterize: Use values.yaml to parameterize your Helm chart, allowing for customization of values like container image, ports, and environment variables.
+
+Package Helm Chart: Package the Helm chart into a .tgz file.
+
+===================================================================================================================================================
+
+Ticket-4: Automate Deployment with Ansible
+
+Ansible Playbook Structure: Create an Ansible playbook and directory structure for your automation tasks.
+
+Namespace Configuration: Use Ansible to create Kubernetes namespaces (e.g., dev, uat, prod) if they don't exist.
+
+Deploy Helm Chart: Use the helm Ansible module to deploy the Helm chart created in Ticket-3 to the desired namespace. Pass appropriate values based on the environment (dev, uat, prod).
+
+Environment-Specific Message: Modify the web application environment variable using Ansible to display "Hello {{ENV}} Kube," where {{ENV}} depends on the environment.
+
+Wait Mechanism: Implement a wait mechanism, such as using the wait_for Ansible module, to ensure the deployment is successful. Fail the playbook if the deployment fails.
